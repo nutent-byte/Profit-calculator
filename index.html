@@ -113,8 +113,8 @@ input[type="number"].d-input:focus { border-color: #6366f1; background: #fff; }
       </div>
       <div class="field-label">VAT</div>
       <div class="vat-row">
-        <button class="vat-btn active-ex" id="s-vex" onclick="setVat('s','ex')">VAT นอก (+7%)</button>
-        <button class="vat-btn" id="s-vin" onclick="setVat('s','in')">VAT ใน (ถอย)</button>
+        <button class="vat-btn" id="s-vex" onclick="setVat('s','ex')">VAT นอก (+7%)</button>
+        <button class="vat-btn active-in" id="s-vin" onclick="setVat('s','in')">VAT ใน (ถอย)</button>
       </div>
       <div class="summary-box" id="s-summary">
         <div class="s-row"><span class="sl">—</span><span class="sv">ใส่ราคาขายเพื่อคำนวณ</span></div>
@@ -140,7 +140,7 @@ input[type="number"].d-input:focus { border-color: #6366f1; background: #fff; }
 <button class="reset-btn" onclick="resetAll()">↺ ล้างค่าทั้งหมด</button>
 
 <script>
-const vatState = { c: 'ex', s: 'ex' };
+const vatState = { c: 'ex', s: 'in' };
 let compareMode = 'exvat';
 
 function fmt(n) {
@@ -278,8 +278,9 @@ function resetAll() {
   ['c','s'].forEach(function(p) {
     document.getElementById(p + '-price').value = '';
     ['d1','d2','d3'].forEach(function(d) { document.getElementById(p + '-' + d).value = ''; });
-    setVat(p, 'ex');
   });
+  setVat('c', 'ex');
+  setVat('s', 'in');
   compareMode = 'exvat';
   document.getElementById('btn-exvat').className = 'toggle-btn active';
   document.getElementById('btn-incvat').className = 'toggle-btn';
